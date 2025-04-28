@@ -9,7 +9,8 @@ class Colaborador(Model):
     endereco = CharField()
     telefone = CharField()
     email = CharField()
-    anotacoes = TextField()
+    # anotacoes = TextField()
+    anotacoes = TextField(null=True)
     search_vector = TSVectorField()
 
     class Meta:

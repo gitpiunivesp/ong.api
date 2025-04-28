@@ -9,7 +9,8 @@ class Interessado(Model):
     telefone = CharField()
     email = CharField()
     rede_social = CharField()
-    anotacoes = TextField()
+    # anotacoes = TextField()
+    anotacoes = TextField(null=True)
     search_vector = TSVectorField()
 
     class Meta:
