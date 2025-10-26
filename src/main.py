@@ -22,17 +22,21 @@ from src.blueprints.relatorios_bp import relatorio_bp
 from src.database import db
 
 app = Flask(__name__)
-CORS(app)
+
+CORS(app, resources={r"/": {"origins": ""}})
+
 
 with app.app_context():
     if not db.is_connection_usable():
         db.connect()
     db.create_tables([Empresa, Usuario, Colaborador, Animal, Interessado, Tutor, Agendamento])
 
+
 @app.teardown_appcontext
 def close_db(exception=None):
     if db.is_connection_usable():
         db.close()
+
 
 app.register_blueprint(empresa_bp)
 app.register_blueprint(usuario_bp)
@@ -43,3 +47,7 @@ app.register_blueprint(tutor_bp)
 app.register_blueprint(agendamento_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(relatorio_bp)
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
